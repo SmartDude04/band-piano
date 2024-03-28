@@ -1,0 +1,88 @@
+@keyframes zoomOutOnLoad {
+    from {
+        opacity: 60%;
+    }
+
+    to {
+        opacity: 100%;
+        width: 100%;
+        background-position: 0 0;
+    }
+}
+
+
+head, body {
+    z-index: 0;
+    /*Image from Freepik*/
+    background: url("img/homepage-background.png") no-repeat 0 0;
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    animation: 0.75s ease 0s zoomOutOnLoad;
+}
+
+.anton-regular {
+  font-family: "Anton", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.selection-button {
+    text-align: center;
+    font-size: 13vh;
+    margin: 1%;
+    width: 40%;
+    background-color: #254ea8;
+    color: white;
+    border-radius: 25px;
+    border: 5px solid black;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.selection-button:hover {
+    background-color: #ffffff;
+    color: #254ea8;
+    border: 5px solid #254ea8;
+    box-shadow: 0 0 15px #3b3b3b;
+    transition: 0.25s;
+}
+
+.link {
+    color: #0808b9;
+}
+
+#big-box {
+    margin: 5%;
+    text-align: center;
+    background-color: white;
+    border: 10px solid black;
+    border-radius: 50px;
+    box-shadow: 0 0 25px #000000;
+}
+
+#main-header {
+    font-size: 15vh;
+    text-decoration: underline;
+    padding-top: 0;
+}
+
+#person-selection {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-bottom: 5%;
+}
+
+#footer  {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    color: black;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    text-align: center;
+    font-size: 1vh;
+}

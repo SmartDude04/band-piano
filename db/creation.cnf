@@ -1,0 +1,10 @@
+CREATE DATABASE `band_piano` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */
+
+create table instruments
+(
+    inst_id         int auto_increment
+        primary key,
+    inst_name       varchar(32) not null,
+    inst_key_offset int         not null
+);
+
