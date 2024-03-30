@@ -1,0 +1,53 @@
+html {
+    background: linear-gradient(135deg, #69d6e0, #6f82da, #dd49f8) no-repeat;
+    height: 100vh;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+
+    font-size: 100%;
+}
+
+input[type=password] {
+    font-size: 1.25rem;
+    width: 75%;
+    height: 7%;
+
+    border: 2px solid gray;
+    border-radius: 4px;
+    outline: none;
+
+    text-align: center;
+
+    transition: 0.5s;
+
+}
+
+input[type=password]:focus {
+    border: 2px solid black;
+
+    transition: 0.5s;
+}
+
+#login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+#login-panel {
+    width: 35%;
+    height: 35%;
+    background-color: white;
+    border-radius: 16px;
+
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+#login-title {
+    margin-bottom: 5vh;
+}
