@@ -12,8 +12,8 @@ create table users
 (
     usr_id       int auto_increment
         primary key,
-    usr_name     varchar(32) not null,
-    usr_password varchar(64) not null
+    usr_name     varchar(32)  not null,
+    usr_password varchar(255) not null
 );
 
 create table tokens
