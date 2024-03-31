@@ -38,9 +38,8 @@ if (isset($_POST["submit"]) && isset($_POST["username"]) && isset($_POST["passwo
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=1080, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=chrome">
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
     <title>Conductor Login &bull; Band Piano</title>
     <link rel="stylesheet" href="login.css?v=<?php echo rand(0, 1000); ?>">
     <link rel="stylesheet" href="../global.css">
@@ -64,7 +63,7 @@ if (isset($_POST["submit"]) && isset($_POST["username"]) && isset($_POST["passwo
             </label>
 
             <label>
-                <input type="password" required placeholder="Enter The Password" class="poppins-medium" name="password" id="pw-field">
+                <input type="password" required placeholder="Enter Your Password" class="poppins-medium" name="password" id="pw-field">
             </label>
 
             <input type="submit" value="Submit" id="pw-submit" disabled="disabled" name="submit">
