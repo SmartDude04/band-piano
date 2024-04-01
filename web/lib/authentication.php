@@ -2,7 +2,8 @@
 
 use Random\RandomException;
 
-function sql_connect(): mysqli {
+
+function db_connect(): mysqli {
     $hostname = "localhost";
     $username = "root";
     $password = "NsW284i^n95raK@Y%N4#";
@@ -11,40 +12,49 @@ function sql_connect(): mysqli {
     return new mysqli($hostname, $username, $password, $database);
 }
 
-function execute_sql(string $script): mysqli_result {
-    // Get a SQL connection
-    $conn = sql_connect();
-
-    // Prevent SQL injection
-    $script = $conn->real_escape_string($script);
-
-    // Store the result
-    $result = $conn->execute_query($script);
-
-    $conn->close();
-
-    if (!$result) {
-        exit("SQL statement failed. Please reload...");
-    }
-
-    return $result;
-}
-
 function logout(): bool {
 
 }
 
 function confirm_session(): bool {
+    // Check for a session, then cookie triplet, then cookie double (problem), then return false
+    if (isset($_SESSION["auth"]) && $_SESSION["auth"]) {
+        // There is a session; no more info needed. Return true
+        return true;
+    } else if (isset($_COOKIE["auth"])) {
+        // There is a cookie; continue with verification
+        $conn = db_connect();
 
+        $arr = explode("|", $_COOKIE["auth"]);
+
+        // If the length of the cookie array does not match what is expected, return false and stop verification
+        if (count($arr) != 3) {
+            return false;
+        }
+
+        // Get the cookie triplet
+        $series_identifier = $conn->real_escape_string($arr[0]);
+        $session_token = $conn->real_escape_string($arr[1]);
+        $user_hash = $conn->real_escape_string($arr[2]);
+
+
+    }
 }
 
 /**
  * @throws RandomException
  */
 function login($username, $password): bool {
+    $expire_days = 7;
 
     // Confirm the user is real
-    $result = execute_sql("SELECT * FROM users WHERE usr_name = '" . $username . "'");
+    $conn = db_connect();
+
+    // Prevent SQL injection
+    $username = $conn->real_escape_string($username);
+
+    // Get the credentials
+    $result = $conn->execute_query("SELECT * FROM users WHERE usr_name = '$username'");
     $row = mysqli_num_rows($result) == 1 ? mysqli_fetch_assoc($result) : "";
 
     if (mysqli_num_rows($result) == 1 && password_verify($password, $row["usr_password"])) {
@@ -53,9 +63,23 @@ function login($username, $password): bool {
         // Generate the info for a session row in the database and a cookie
         $series_identifier = bin2hex(random_bytes(32));
         $session_token = bin2hex(random_bytes(32));
-        $user_hash = password_hash($row["usr_name"], PASSWORD_DEFAULT);
+        $username = $row["usr_name"];
+        $user_hash = password_hash($username, PASSWORD_DEFAULT);
+        $expire = time() + ($expire_days * 24 * 60 * 60);
 
+        // Generate a cookie
+        $cookie_val = "$series_identifier|$session_token|$user_hash";
+        setcookie("auth", $cookie_val, $expire);
 
+        // Generate a session record on a database
+        $conn->execute_query("INSERT INTO band_piano.sessions (series_identifier, session_token, username, expire) VALUES ($series_identifier, $session_token, $username, $expire)");
+
+        // Create a session
+        session_start();
+        $_SESSION["auth"] = true;
+
+        // Confirm the login was successful
+        return true;
     } else {
         return false;
     }

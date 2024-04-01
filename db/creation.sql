@@ -1,4 +1,4 @@
-# CREATE DATABASE `band_piano` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+CREATE DATABASE `band_piano` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 
 create table instruments
 (
@@ -10,10 +10,10 @@ create table instruments
 
 create table sessions
 (
-    series_identifier varchar(64) not null,
-    session_token     varchar(64) not null,
-    username          varchar(32) not null,
-    expire            datetime    not null
+    series_identifier varchar(64)     not null,
+    session_token     varchar(64)     not null,
+    username          varchar(32)     not null,
+    expire            bigint unsigned not null
 );
 
 create table users

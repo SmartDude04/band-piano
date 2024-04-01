@@ -46,9 +46,8 @@ On the database, a table of tokens stores four pieces of data:
    1. Username: Taken from the record in the `users` table
    2. Series Identifier: 32-byte (64 digits in hex) cryptographically-secure random string of hex digits
    3. Session Token: 32-byte (64 digits in hex) cryptographically-secure random string of hex digits
-3. Upon creation of these variables, a cookie will be created storing the *HASHED* username, session identifier, and secret token, and will last for 7 days
-4. ***CLEANUP***: To make sure unused items in the database are deleted, any records past the expiry date will be deleted. **If deployed correctly, this would likely be a cronjob**
-5. A database record in the `session_tokens` table will be created, storing all the three variables along with an expiry date at the same time as the cookie
+3. Upon creation of these variables, a cookie will be created storing the *HASHED* username, session identifier, and secret token, and will last for *x* days
+4. A database record in the `session_tokens` table will be created, storing all the three variables along with an expiry date at the same time as the cookie
 
 ### Verification:
 1. If a site is requested that requires access verification, it will first check for the existence of a cookie
@@ -57,3 +56,11 @@ On the database, a table of tokens stores four pieces of data:
 4. First, a database record with the cookie triplet will be located
 5. The username will be checked against the hash stored, and the session token will be verified to match
 6. If successful, a new cookie and database record will **replace** the existing one, with the same series identifier and username but *different* session token
+
+## Sessions
+
+Sessions will be used while the browser is open to minimize the load on the database
+
+1. When a website is accessed, it will first check if a session is active
+2. If so, you don't need to check for a cookie
+3. If you need to check for a cookie, set a session at the end
