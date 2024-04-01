@@ -21,6 +21,7 @@ function confirm_session(): bool {
     if (isset($_SESSION["auth"]) && $_SESSION["auth"]) {
         // There is a session; no more info needed. Return true
         return true;
+
     } else if (isset($_COOKIE["auth"])) {
         // There is a cookie; continue with verification
         $conn = db_connect();
@@ -36,6 +37,11 @@ function confirm_session(): bool {
         $series_identifier = $conn->real_escape_string($arr[0]);
         $session_token = $conn->real_escape_string($arr[1]);
         $user_hash = $conn->real_escape_string($arr[2]);
+
+        $result = $conn->execute_query("SELECT username FROM sessions
+                WHERE series_identifier = '$series_identifier'
+                AND session_token = '$session_token'
+                AND user_hash = '$user_hash'");
 
 
     }
@@ -72,7 +78,7 @@ function login($username, $password): bool {
         setcookie("auth", $cookie_val, $expire);
 
         // Generate a session record on a database
-        $conn->execute_query("INSERT INTO band_piano.sessions (series_identifier, session_token, username, expire) VALUES ($series_identifier, $session_token, $username, $expire)");
+        $conn->execute_query("INSERT INTO band_piano.sessions (series_identifier, session_token, username, expire) VALUES ($series_identifier, $session_token, $user_hash, $expire)");
 
         // Create a session
         session_start();
