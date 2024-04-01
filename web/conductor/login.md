@@ -1,5 +1,7 @@
 # Login Verification & Cookie Storage Process
 
+Process adapted from [This Stack Overflow Article](https://stackoverflow.com/questions/4773609/what-is-a-relatively-secure-way-of-using-a-login-cookie)
+
 ## Login Creation
 
 1. On a page, a user will enter a username and password
@@ -17,40 +19,41 @@
 ## Logout Procedures
 
 1. When a user logs out, a script will run
-2. This will get the user ID and session token from the cookie
-3. The database will be directed to delete any records that include the user ID and session token
-4. This, in theory, should only delete the single record from the current browser
+2. This will get the required info from the cookie
+3. The database will be directed to delete any records that include the cookie's session token
+4. This, in theory, should only delete the record from the current browser
 5. Finally, the cookie will be deleted from the users browser
 
 ## Cookie Generation, Verification, and Storage
 
 A cookie is a piece of data stored on a user's browser. It can be used to securely verify if a user has previously logged in
 
-The cookie will consist of two pieces of data:
-1. A user ID
-2. A secret token
+The cookie will consist of three pieces of data:
+1. A username (hashed)
+2. A series identifier
+3. A session token
 
-On the database, a table of tokens stores three pieces of data:
-1. A user ID
-2. A secret token 
-3. A machine identifier hash
+On the database, a table of tokens stores four pieces of data:
+1. A series identifier
+2. A session token
+3. A username
+4. An expiry date
 
-*Even if a threat actor were to gain access to the database storing the three pieces, when verifying with that cookie, the MAC address will need to be verified against a hash, rendering it useless*
 
 ### Generation:
 1. Upon verification of a password, a cookie and database record will be created
 2. Three variables will be created from either new or existing data:
-    1. User ID: Taken from the record in the `users` table
-    2. Secret token: 16-byte (32 digits in hex) cryptographically-secure random string of hex digits
-    3. Machine Identifier: A hashed representation of the user's MAC Address
-3. Upon creation of these variables, a cookie will be created storing the User ID and Secret Token that will last for 7 days (or another set interval)
-4. ***CLEANUP***: To make sure unused items in the database are deleted, any records with the same machine identifier hash will be deleted. Doing it this way allows for multiple devices with the same user ID to be used.
-5. A database record in the `session_tokens` table will be created, storing all three variables.
+   1. Username: Taken from the record in the `users` table
+   2. Series Identifier: 32-byte (64 digits in hex) cryptographically-secure random string of hex digits
+   3. Session Token: 32-byte (64 digits in hex) cryptographically-secure random string of hex digits
+3. Upon creation of these variables, a cookie will be created storing the *HASHED* username, session identifier, and secret token, and will last for 7 days
+4. ***CLEANUP***: To make sure unused items in the database are deleted, any records past the expiry date will be deleted. **If deployed correctly, this would likely be a cronjob**
+5. A database record in the `session_tokens` table will be created, storing all the three variables along with an expiry date at the same time as the cookie
 
 ### Verification:
 1. If a site is requested that requires access verification, it will first check for the existence of a cookie
 2. If no cookie was found, the user will be redirected to the login page
 3. If a cookie was found, verification can continue. ***If at any point this process fails, the user will be redirected to the login page***
-4. First, a database record with the user ID and secret token will be accessed
-5. The machine identifier hash will be accessed, and with the `password_verify()` function it will be checked against the user's MAC address
-6. If these steps yield a result from the database and a match with the MAC address token, the user will be able to continue
+4. First, a database record with the cookie triplet will be located
+5. The username will be checked against the hash stored, and the session token will be verified to match
+6. If successful, a new cookie and database record will **replace** the existing one, with the same series identifier and username but *different* session token

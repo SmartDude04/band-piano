@@ -1,35 +1,14 @@
 <?php
-    // Check if the user has tried to log in
 use Random\RandomException;
+require "../lib/authentication.php";
 
 // TODO: Check to make sure password and username are within a good length
 
 if (isset($_POST["submit"]) && isset($_POST["username"]) && isset($_POST["password"])) {
 
-        // If so, check if they are really a user on the database
-        $conn = new mysqli("localhost", "root", "NsW284i^n95raK@Y%N4#", "band_piano");
-        $result = $conn->execute_query("SELECT * FROM users WHERE usr_name = '" . $_POST["username"] . "'");
-        if (mysqli_num_rows($result) == 1) {
-            // If they are a user, make sure the password matches
-            $row = mysqli_fetch_assoc($result);
-            $passwordHash = $row["usr_password"];
-            $passwordCorrect = password_verify($_POST["password"], $passwordHash);
-            if ($passwordCorrect) {
-                // Get session rand number
-                $sessionRand = "";
-                try {
-                    $sessionRand = bin2hex(random_bytes(22));
-                } catch (RandomException $e) {
-                    // If there is a problem, reload the page
-                    header("login.php");
-                }
 
-                // Insert the session token into the database
-                echo $sessionRand;
-            }
 
-        }
-    }
+}
 
     // If we get down here, then the user either entered a wrong password or did something wrong
 ?>
