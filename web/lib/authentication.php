@@ -16,7 +16,19 @@ function logout(): bool {
 
 }
 
+function new_user($username, $password) {
+
+}
+
+/**
+ * @throws RandomException
+ */
 function confirm_session(): bool {
+
+    $expire_days = 7;
+
+    session_start();
+
     // Check for a session, then cookie triplet, then cookie double (problem), then return false
     if (isset($_SESSION["auth"]) && $_SESSION["auth"]) {
         // There is a session; no more info needed. Return true
@@ -38,12 +50,69 @@ function confirm_session(): bool {
         $session_token = $conn->real_escape_string($arr[1]);
         $user_hash = $conn->real_escape_string($arr[2]);
 
-        $result = $conn->execute_query("SELECT username FROM sessions
-                WHERE series_identifier = '$series_identifier'
-                AND session_token = '$session_token'
-                AND user_hash = '$user_hash'");
+        // Check if the triplet (with a correct expiry date) is present on the database
+        $result = $conn->execute_query("SELECT sn_username FROM sessions
+                WHERE sn_series_identifier = '$series_identifier'
+                AND sn_session_token = '$session_token'
+                AND SHA2(sn_username, 256) = '$user_hash'
+                AND sn_expire > UNIX_TIMESTAMP()");
+
+        if (mysqli_num_rows($result) == 1) {
+            // Cookie triplet was present!
+            // Make a new cookie, create a session, and return a positive verification
+            $row = mysqli_fetch_assoc($result);
+
+            // Get the same info for some parts (redundant but should be done anyway)
+            $username = $row["sn_username"];
+            $user_hash = hash("sha256", $username);
+            $expire = time() + ($expire_days * 24 * 60 * 60);
+
+            // Make a new token
+            $new_token = bin2hex(random_bytes(32));
+
+            // Set the new cookie
+            $cookie_val = "$series_identifier|$new_token|$user_hash";
+            setcookie("auth", $cookie_val, $expire);
+
+            // Update the session database record with the new session token
+            $conn->execute_query("UPDATE sessions
+            SET sn_session_token = '$new_token', sn_expire = '$expire'
+            WHERE sn_series_identifier = '$series_identifier'
+            AND SHA2(sn_username, 256) = '$user_hash'");
+
+            // Set up a session for the user
+            $_SESSION["auth"] = true;
+            $_SESSION["username"] = $username;
+
+            // Validate that all was successful and the user is confirmed logged in
+            return true;
 
 
+        } else if (mysqli_num_rows($conn->execute_query("SELECT sn_username FROM sessions
+                   WHERE sn_series_identifier = '$series_identifier'
+                     AND SHA2(sn_username, 256) = '$user_hash'
+                     AND sn_expire > UNIX_TIMESTAMP()")) == 1) {
+            // Series is valid but token is not; something malicious has happened
+
+            // Delete all database records with the series identifier present
+            $conn->execute_query("DELETE from sessions WHERE sn_series_identifier = '$series_identifier'");
+
+            // Remove the cookie by setting it to expire a time in the past
+            setcookie("auth", "", time() - 3600);
+
+            return false;
+        } else {
+            // Cookie was present but something else weird happened; delete it and return false
+
+            setcookie("auth", "", time() - 3600);
+
+            return false;
+        }
+
+    } else {
+        // No cookie or session present; return false
+
+        return false;
     }
 }
 
@@ -70,7 +139,7 @@ function login($username, $password): bool {
         $series_identifier = bin2hex(random_bytes(32));
         $session_token = bin2hex(random_bytes(32));
         $username = $row["usr_name"];
-        $user_hash = password_hash($username, PASSWORD_DEFAULT);
+        $user_hash = hash("sha256", $username);
         $expire = time() + ($expire_days * 24 * 60 * 60);
 
         // Generate a cookie
@@ -78,11 +147,12 @@ function login($username, $password): bool {
         setcookie("auth", $cookie_val, $expire);
 
         // Generate a session record on a database
-        $conn->execute_query("INSERT INTO band_piano.sessions (series_identifier, session_token, username, expire) VALUES ($series_identifier, $session_token, $user_hash, $expire)");
+        $conn->execute_query("INSERT INTO band_piano.sessions (sn_series_identifier, sn_session_token, sn_username, sn_expire) VALUES ($series_identifier, $session_token, $user_hash, $expire)");
 
         // Create a session
         session_start();
         $_SESSION["auth"] = true;
+        $_SESSION["username"] = $username;
 
         // Confirm the login was successful
         return true;
