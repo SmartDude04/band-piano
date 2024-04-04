@@ -2,15 +2,44 @@
 use Random\RandomException;
 require "../lib/authentication.php";
 
-// TODO: Check to make sure password and username are within a good length
+if (isset($_GET["logout"])) {
+    logout();
+    header("Location: login.php");
+    exit();
+}
+
+try {
+    if (confirm_session()) {
+        // If the user is already logged in, no need to continue; redirect to panel
+        header("Location: index.php");
+        exit();
+    }
+} catch (RandomException $e) {
+    // If something fails, delete the cookie and session data then reload
+    session_destroy();
+    setcookie("auth", "", time() - 3600, "/");
+    header("Location: ../index.html");
+    exit();
+}
+
+$retry = false;
 
 if (isset($_POST["submit"]) && isset($_POST["username"]) && isset($_POST["password"])) {
 
 
-
+    try {
+        if (login($_POST["username"], $_POST["password"])) {
+            // Login approved
+            header("Location: index.php");
+        } else {
+            // Login denied
+            $retry = true;
+        }
+    } catch (RandomException $e) {
+        header("Location: login.php");
+        exit();
+    }
 }
-
-    // If we get down here, then the user either entered a wrong password or did something wrong
 ?>
 
 <!doctype html>
@@ -38,16 +67,19 @@ if (isset($_POST["submit"]) && isset($_POST["username"]) && isset($_POST["passwo
 
         <form method="post" action="">
             <label>
-                <input type="text" required placeholder="Enter The Username" class="poppins-medium" name="username" id="un-field">
+                <input value="<?php if (isset($_POST["username"])) {echo $_POST["username"];} ?>" type="text" required placeholder="Username" class="poppins-medium" name="username" id="un-field">
             </label>
 
             <label>
-                <input type="password" required placeholder="Enter Your Password" class="poppins-medium" name="password" id="pw-field">
+                <input value="<?php if (isset($_POST["password"])) {echo $_POST["password"];} ?>" type="password" required placeholder="Password" class="poppins-medium <?php if($retry) {echo "incorrect-shake";} ?>" name="password" id="pw-field">
             </label>
 
-            <input type="submit" value="Submit" id="pw-submit" disabled="disabled" name="submit">
+            <br/>
+            <input type="submit" value="Login" id="pw-submit" disabled="disabled" name="submit" class="poppins-black button-disabled">
 
         </form>
+
+        <h1 id="account-redirect" class="poppins-medium">Don't have an account? <a href="new-account.php" id="redirect-link">Create One Here</a></h1>
     </div>
 </div>
 </body>

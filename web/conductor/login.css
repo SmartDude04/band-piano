@@ -1,13 +1,50 @@
+@keyframes gradient {
+    0% {
+        background-position: 0 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0 50%;
+    }
+}
+
+@keyframes shake {
+    0% { transform: translate(15px, 0px); border: 2px solid red; background-color: #ff8e8e;}
+    5% { transform: translate(-15px, 0px);}
+
+    20% { transform: translate(8px, 0px);}
+    25% { transform: translate(-8px, 0px);}
+
+    40% { transform: translate(6px, 0px);}
+    45% { transform: translate(-6px, 0px);}
+
+    60% { transform: translate(4px, 0px);}
+    65% { transform: translate(-4px, 0px);}
+
+    80% { transform: translate(2px, 0px);}
+    85% { transform: translate(-2px, 0px);}
+
+    100% { transform: translate(0px, 0px);}
+}
+
 html {
-    background: linear-gradient(135deg, #69d6e0, #6f82da, #dd49f8) no-repeat;
+    background-image: linear-gradient(135deg, #69e06b, #69d6e0, #6f82da, #dd49f8, #e4294c);
+
     height: 100vh;
+    background-size: 400% 400%;
+
+    animation: gradient 15s ease-in-out infinite;
 }
 
 html, body {
     margin: 0;
     padding: 0;
 
-    font-size: 100%;
+    font-size: 1vw;
 }
 
 input[type=password], input[type=text] {
@@ -21,14 +58,51 @@ input[type=password], input[type=text] {
 
     text-align: center;
 
-    transition: 0.5s;
+    margin-top: 0.5vh;
+    margin-bottom: 0.5vh;
 
+    transition: 0.5s;
 }
 
 input[type=password]:focus, input[type=text]:focus {
     border: 2px solid black;
 
     transition: 0.5s;
+}
+
+input[type=submit] {
+    background: linear-gradient(135deg, #69d6e0, #6f82da, #dd49f8);
+
+    width: 16vw;
+    height: 6vh;
+
+    margin-top: 2vh;
+    padding: 6px;
+
+    border-radius: 25px;
+    border: none;
+
+    color: white;
+    font-size: 24px;
+
+    transition: 0.05s;
+}
+
+input[type=submit]:hover {
+    width: 18vw;
+    height: 7vh;
+    margin-top: 1.5vh;
+    margin-bottom: -0.5vh;
+    cursor: pointer;
+
+    border-radius: 35px;
+
+    box-shadow: 0 4px 8px #939393;
+
+    padding-top: 5px;
+    font-size: 28px;
+
+    transition: 0.05s;
 }
 
 #login-container {
@@ -40,7 +114,7 @@ input[type=password]:focus, input[type=text]:focus {
 
 #login-panel {
     width: 35%;
-    height: 35%;
+    height: 40%;
     background-color: white;
     border-radius: 16px;
 
@@ -49,5 +123,50 @@ input[type=password]:focus, input[type=text]:focus {
 }
 
 #login-title {
-    margin-bottom: 5vh;
+    margin-bottom: 3vh;
+}
+
+#account-redirect {
+    margin-top: 3vh;
+    color: gray;
+    font-size: 16px;
+}
+
+#redirect-link {
+    color: gray;
+}
+
+#password-length {
+    font-size: 1vw;
+    padding: 0;
+    margin: 0 0 -5vh;
+    color: red;
+    text-decoration: underline;
+}
+
+.incorrect-shake {
+    animation: shake 0.5s;
+}
+
+.button-disabled {
+    background: linear-gradient(135deg, #377177, #455188, #9a32ae) !important;
+
+    transition: 0.25s;
+}
+
+.button-disabled:hover {
+    width: 16vw !important;
+    height: 6vh !important;
+    margin-top: 2vh !important;
+    margin-bottom: 0 !important;
+    cursor: auto !important;
+
+    border-radius: 25px !important;
+
+    box-shadow: none !important;
+
+    padding-top: 6px !important;
+    font-size: 24px !important;
+
+    transition: 0s !important;
 }

@@ -13,11 +13,44 @@ function db_connect(): mysqli {
 }
 
 function logout(): bool {
+    // Remove the session
+    if (isset($_SESSION["auth"])) {
+        session_destroy();
+    }
 
+    // Delete the session from the database
+    $conn = db_connect();
+    $series_identifier = explode("|", $_COOKIE["auth"])[0];
+    $conn->execute_query("DELETE FROM sessions WHERE sn_series_identifier = '$series_identifier'");
+
+    // Remove the cookie
+    setcookie("auth", "", time() - 3600, "/");
+
+    return true;
 }
 
-function new_user($username, $password) {
+/**
+ * @throws RandomException
+ */
+function new_user($username, $password): bool {
+    // Register the user in the database
 
+    $conn = db_connect();
+
+    // Create their password hash
+    $password = $conn->real_escape_string($password);
+    $password_hash = password_hash($password, PASSWORD_DEFAULT);
+
+    $username = $conn->real_escape_string($username);
+
+    // Insert them into the database
+    $conn->execute_query("INSERT INTO users (usr_name, usr_password) VALUES ('$username', '$password_hash')");
+
+    // Log them in
+    login($username, $password);
+
+    // Return true for success
+    return true;
 }
 
 /**
@@ -27,13 +60,10 @@ function confirm_session(): bool {
 
     $expire_days = 7;
 
-    session_start();
-
     // Check for a session, then cookie triplet, then cookie double (problem), then return false
     if (isset($_SESSION["auth"]) && $_SESSION["auth"]) {
         // There is a session; no more info needed. Return true
         return true;
-
     } else if (isset($_COOKIE["auth"])) {
         // There is a cookie; continue with verification
         $conn = db_connect();
@@ -72,7 +102,7 @@ function confirm_session(): bool {
 
             // Set the new cookie
             $cookie_val = "$series_identifier|$new_token|$user_hash";
-            setcookie("auth", $cookie_val, $expire);
+            setcookie("auth", $cookie_val, $expire, "/");
 
             // Update the session database record with the new session token
             $conn->execute_query("UPDATE sessions
@@ -81,8 +111,8 @@ function confirm_session(): bool {
             AND SHA2(sn_username, 256) = '$user_hash'");
 
             // Set up a session for the user
+            session_start();
             $_SESSION["auth"] = true;
-            $_SESSION["username"] = $username;
 
             // Validate that all was successful and the user is confirmed logged in
             return true;
@@ -98,13 +128,14 @@ function confirm_session(): bool {
             $conn->execute_query("DELETE from sessions WHERE sn_series_identifier = '$series_identifier'");
 
             // Remove the cookie by setting it to expire a time in the past
-            setcookie("auth", "", time() - 3600);
+            setcookie("auth", "", time() - 3600, "/");
 
             return false;
         } else {
             // Cookie was present but something else weird happened; delete it and return false
+            // Possibly the database record was deleted before the cookie expired
 
-            setcookie("auth", "", time() - 3600);
+            setcookie("auth", "", time() - 3600, "/");
 
             return false;
         }
@@ -144,15 +175,14 @@ function login($username, $password): bool {
 
         // Generate a cookie
         $cookie_val = "$series_identifier|$session_token|$user_hash";
-        setcookie("auth", $cookie_val, $expire);
+        setcookie("auth", $cookie_val, $expire, "/");
 
         // Generate a session record on a database
-        $conn->execute_query("INSERT INTO band_piano.sessions (sn_series_identifier, sn_session_token, sn_username, sn_expire) VALUES ($series_identifier, $session_token, $user_hash, $expire)");
+        $conn->execute_query("INSERT INTO band_piano.sessions (sn_series_identifier, sn_session_token, sn_username, sn_expire) VALUES ('$series_identifier', '$session_token', '$username', '$expire')");
 
         // Create a session
         session_start();
         $_SESSION["auth"] = true;
-        $_SESSION["username"] = $username;
 
         // Confirm the login was successful
         return true;
