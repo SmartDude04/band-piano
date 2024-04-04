@@ -43,6 +43,12 @@ function new_user($username, $password): bool {
 
     $username = $conn->real_escape_string($username);
 
+    // Make sure no users have the same username
+    $num_usernames = $conn->execute_query("SELECT * FROM users WHERE usr_name = '$username'");
+    if (mysqli_num_rows($num_usernames) != 0) {
+        return false;
+    }
+
     // Insert them into the database
     $conn->execute_query("INSERT INTO users (usr_name, usr_password) VALUES ('$username', '$password_hash')");
 

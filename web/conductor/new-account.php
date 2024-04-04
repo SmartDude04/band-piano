@@ -3,17 +3,18 @@ use Random\RandomException;
 require "../lib/authentication.php";
 
 $length_error = false;
+$taken_username = false;
 
 if (isset($_POST["submit"]) && isset($_POST["username"]) && isset($_POST["password"])) {
-    // TODO: Make sure usernames don't match with a database name
+
     if (strlen($_POST["password"]) >= 8) {
         try {
             if (new_user($_POST["username"], $_POST["password"])) {
                 // Login validated
                 header("Location: index.php");
             } else {
-                // Login invalidated
-                header("Location: login.php");
+                // Login incorrect; username is taken
+                $taken_username = true;
             }
             exit();
         } catch (RandomException $e) {
@@ -51,12 +52,13 @@ if (isset($_POST["submit"]) && isset($_POST["username"]) && isset($_POST["passwo
         <h1 id="login-title">Create A New Login</h1>
 
         <form method="post" action="">
+            <h1 id="username-taken" class="poppins-medium" <?php if(!$taken_username) {echo "style='visibility: hidden;'";} ?>>That username is already taken</h1>
             <label>
-                <input type="text" required placeholder="Username" class="poppins-medium" name="username" id="un-field">
+                <input value="<?php if (isset($_POST["username"])) {echo $_POST["username"];} ?>" type="text" required placeholder="Username" class="poppins-medium <?php if($taken_username) {echo "incorrect-shake";} ?>" name="username" id="un-field">
             </label>
 
             <label>
-                <input type="password" required placeholder="Password" class="poppins-medium <?php if($length_error) {echo "incorrect-shake";} ?>" name="password" id="pw-field">
+                <input value="<?php if (isset($_POST["password"])) {echo $_POST["username"];} ?>"  type="password" required placeholder="Password" class="poppins-medium <?php if($length_error) {echo "incorrect-shake";} ?>" name="password" id="pw-field">
             </label>
             <h1 id="password-length" class="poppins-medium" <?php if(!$length_error) {echo "style='visibility: hidden;'";} ?>>Password must be at least 8 characters</h1>
 
