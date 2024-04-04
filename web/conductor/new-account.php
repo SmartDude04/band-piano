@@ -12,11 +12,11 @@ if (isset($_POST["submit"]) && isset($_POST["username"]) && isset($_POST["passwo
             if (new_user($_POST["username"], $_POST["password"])) {
                 // Login validated
                 header("Location: index.php");
+                exit();
             } else {
                 // Login incorrect; username is taken
                 $taken_username = true;
             }
-            exit();
         } catch (RandomException $e) {
             header("Location: ../index.php");
             exit();
