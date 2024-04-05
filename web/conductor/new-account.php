@@ -64,12 +64,9 @@ if (isset($_POST["submit"]) && isset($_POST["username"]) && isset($_POST["passwo
 
             <br/>
             <input type="submit" value="Create Account" id="pw-submit" disabled="disabled" name="submit" class="poppins-black button-disabled">
-
         </form>
-
-        <h1 id="account-redirect" class="poppins-medium">Already have an account? <a href="login.php" id="redirect-link">Login Here</a></h1>
-
     </div>
+    <h1 id="account-redirect" class="poppins-medium">Already have an account? <a href="login.php" id="redirect-link">Login Here</a></h1>
 </div>
 
 </body>

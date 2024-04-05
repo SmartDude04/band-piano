@@ -66,6 +66,7 @@ if (isset($_POST["submit"]) && isset($_POST["username"]) && isset($_POST["passwo
         <h1 id="login-title">Conductor Login</h1>
 
         <form method="post" action="">
+            <h1 id="username-taken" class="poppins-medium" style='visibility: hidden;'>That username is already taken</h1>
             <label>
                 <input value="<?php if (isset($_POST["username"])) {echo $_POST["username"];} ?>" type="text" required placeholder="Username" class="poppins-medium" name="username" id="un-field">
             </label>
@@ -73,14 +74,12 @@ if (isset($_POST["submit"]) && isset($_POST["username"]) && isset($_POST["passwo
             <label>
                 <input value="<?php if (isset($_POST["password"])) {echo $_POST["password"];} ?>" type="password" required placeholder="Password" class="poppins-medium <?php if($retry) {echo "incorrect-shake";} ?>" name="password" id="pw-field">
             </label>
-
+            <h1 id="password-length" class="poppins-medium" style='visibility: hidden;'>Password must be at least 8 characters</h1>
             <br/>
             <input type="submit" value="Login" id="pw-submit" disabled="disabled" name="submit" class="poppins-black button-disabled">
-
         </form>
-
-        <h1 id="account-redirect" class="poppins-medium">Don't have an account? <a href="new-account.php" id="redirect-link">Create One Here</a></h1>
     </div>
+    <h1 id="account-redirect" class="poppins-medium">Don't have an account? <a href="new-account.php" id="redirect-link">Create One Here</a></h1>
 </div>
 </body>
 </html>

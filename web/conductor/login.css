@@ -87,7 +87,7 @@ input[type=submit] {
     border: none;
 
     color: white;
-    font-size: 24px;
+    font-size: 1.6vw;
 
     transition: 0.05s;
 }
@@ -104,7 +104,7 @@ input[type=submit]:hover {
     box-shadow: 0 4px 8px #939393;
 
     padding-top: 5px;
-    font-size: 28px;
+    font-size: 1.9vw;
 
     transition: 0.05s;
 }
@@ -113,14 +113,16 @@ input[type=submit]:hover {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     height: 100vh;
 }
 
 #login-panel {
     width: 35vw;
-    height: 42vh;
+    height: 20vw;
     background-color: white;
-    border-radius: 16px;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
 
     text-align: center;
     font-size: 1.5rem;
@@ -131,9 +133,15 @@ input[type=submit]:hover {
 }
 
 #account-redirect {
-    margin-top: 2.5vh;
+    margin-top: 0;
     color: gray;
-    font-size: 16px;
+    font-size: 1vw;
+    text-align: center;
+
+    background-color: white;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    width: 35vw;
 }
 
 #redirect-link {
@@ -177,7 +185,7 @@ input[type=submit]:hover {
     box-shadow: none !important;
 
     padding-top: 6px !important;
-    font-size: 24px !important;
+    font-size: 1.6vw !important;
 
     transition: 0s !important;
 }
