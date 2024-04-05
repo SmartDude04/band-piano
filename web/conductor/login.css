@@ -39,7 +39,7 @@ html {
     background-image: linear-gradient(135deg, #cbdf49, #69e06b, #69d6e0, #6f82da, #f8499b, #e4294c);
 
     height: 100vh;
-    background-size: 400% 400%;
+    background-size: 700% 700%;
 
     animation: gradient 15s ease infinite;
 }

@@ -13,7 +13,9 @@
 </head>
 <body>
     <nav>
-        <img src="../img/band-piano-logo.png" id="logo" alt="Band Piano Logo">
+        <a href="panel.php" id="logo-container">
+            <img src="../img/band-piano-logo.png" id="logo" alt="Band Piano Logo" >
+        </a>
     </nav>
 </body>
 </html>
