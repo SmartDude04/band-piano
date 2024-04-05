@@ -54,7 +54,6 @@ if (isset($_POST["submit"]) && isset($_POST["username"]) && isset($_POST["passwo
 
     <script src="login.js"></script>
 
-
     <!--    Google Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

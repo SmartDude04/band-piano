@@ -1,4 +1,4 @@
-window.onload=function(){
+window.onload = function(){
     document.getElementById("pw-field").addEventListener("keyup", function() {
 
     let usernameInput = document.getElementById("un-field").value;
