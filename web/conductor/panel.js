@@ -10,7 +10,7 @@ function imageHover(e) {
 
     let amt = 10;
     let diffX = (e.pageX - centerX) / amt;
-    let diffY = (e.pageY - centerX) / amt;
+    let diffY = (e.pageY - centerY) / amt;
 
     let img = document.getElementById("logo");
     img.style.transform = "scale(1.1) translate(" + diffX + "px, " + diffY + "px)";
