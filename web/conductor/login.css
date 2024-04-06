@@ -89,7 +89,7 @@ input[type=submit] {
     color: white;
     font-size: 1.6vw;
 
-    transition: 0.05s;
+    transition: 0.1s;
 }
 
 input[type=submit]:hover {
@@ -105,7 +105,17 @@ input[type=submit]:hover {
     padding-top: 5px;
     font-size: 1.9vw;
 
-    transition: 0.05s;
+    transition: 0.1s;
+}
+
+input[type=submit]:active {
+    transform: scale(0.9);
+
+    filter: drop-shadow(0 0 0 #939393);
+
+    box-shadow: 0 0 15px #3b3b3b inset;
+
+    transition: 0.1s;
 }
 
 #login-container {
