@@ -1,6 +1,6 @@
 <?php
 use Random\RandomException;
-require "../lib/authentication.php";
+require "../../lib/authentication.php";
 
 $length_error = false;
 $taken_username = false;
@@ -33,10 +33,10 @@ if (isset($_POST["submit"]) && isset($_POST["username"]) && isset($_POST["passwo
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
     <title>New Account &bull; Band Piano</title>
     <link rel="stylesheet" href="login.css?v=<?php echo rand(0, 1000); ?>">
-    <link rel="stylesheet" href="../global.css">
+    <link rel="stylesheet" href="../../global.css">
     <script src="login.js"></script>
 
     <!--    Google Fonts-->
@@ -66,7 +66,7 @@ if (isset($_POST["submit"]) && isset($_POST["username"]) && isset($_POST["passwo
             <input type="submit" value="Create Account" id="pw-submit" disabled="disabled" name="submit" class="poppins-black button-disabled">
         </form>
     </div>
-    <h1 id="account-redirect" class="poppins-medium">Already have an account? <a href="login.php" id="redirect-link">Login Here</a></h1>
+    <h1 id="account-redirect" class="poppins-medium">Already have an account? <a href="index.php" id="redirect-link">Login Here</a></h1>
 </div>
 
 </body>

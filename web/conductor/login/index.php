@@ -1,24 +1,24 @@
 <?php
 use Random\RandomException;
-require "../lib/authentication.php";
+require "../../lib/authentication.php";
 
 if (isset($_GET["logout"])) {
     logout();
-    header("Location: login.php");
+    header("Location: index.php");
     exit();
 }
 
 try {
     if (confirm_session()) {
         // If the user is already logged in, no need to continue; redirect to panel
-        header("Location: index.php");
+        header("Location: ../panel/index.php");
         exit();
     }
 } catch (RandomException $e) {
     // If something fails, delete the cookie and session data then reload
     session_destroy();
     setcookie("auth", "", time() - 3600, "/");
-    header("Location: ../index.html");
+    header("Location: ../../index.html");
     exit();
 }
 
@@ -30,13 +30,13 @@ if (isset($_POST["submit"]) && isset($_POST["username"]) && isset($_POST["passwo
     try {
         if (login($_POST["username"], $_POST["password"])) {
             // Login approved
-            header("Location: index.php");
+            header("Location: ../panel/index.php");
         } else {
             // Login denied
             $retry = true;
         }
     } catch (RandomException $e) {
-        header("Location: login.php");
+        header("Location: index.php");
         exit();
     }
 }
@@ -47,10 +47,10 @@ if (isset($_POST["submit"]) && isset($_POST["username"]) && isset($_POST["passwo
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=chrome">
-    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
     <title>Conductor Login &bull; Band Piano</title>
     <link rel="stylesheet" href="login.css?v=<?php echo rand(0, 1000); ?>">
-    <link rel="stylesheet" href="../global.css">
+    <link rel="stylesheet" href="../../global.css">
 
     <script src="login.js"></script>
 

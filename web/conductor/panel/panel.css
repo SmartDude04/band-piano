@@ -99,9 +99,15 @@ nav {
     transition: 0.3s;
 }
 
+.page-button:disabled {
+    color: black;
+    background-image: none;
+    background-color: #d6d6d6;
+}
+
 .not-selected:hover {
     cursor: pointer;
-    background-size: 300%;
+    background-size: 225%;
     background-position: 0, 0;
     filter: drop-shadow(0 4px 6px #aeaeae);
     color: white;
