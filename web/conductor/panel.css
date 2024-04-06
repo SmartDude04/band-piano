@@ -8,7 +8,7 @@ nav {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: lightgray;
+    background-color: white;
 
     height: 6vh;
     padding: 1.5vh 1vh 1vh;
@@ -22,14 +22,20 @@ nav {
     max-height: 100%;
     border-radius: 0.8vw;
 
-    transition: 0.05s;
+    transition: 0.1s;
 }
 
 #logo:hover {
     filter: drop-shadow(0 4px 6px #838383);
-    transform: scale(1.1);
+    transform: scale(1.1) rotate(-3deg) translate(0, -2px);
 
     background-color: white;
+
+    transition: 0.1s;
+}
+
+#logo:active {
+    transform: scale(0.9) rotate(-3deg) translate(0, -2px);
 
     transition: 0.05s;
 }
@@ -51,27 +57,94 @@ nav {
 
 #main-menu:hover {
     transform: scale(1.03);
-    filter: drop-shadow(0 4px 6px #838383);
-    backface-visibility: hidden;
+    filter: drop-shadow(0 2px 4px #aeaeae);
 
-    transition: 0.05s;
+    background-image: none;
+    /*opacity: 0.5;*/
+
+    transition: 0.1s;
 }
 
 #main-nav {
     display: contents;
 }
 
-#main-nav > input[type=button] {
-    width: 20%;
-    height: 75%;
-
-    background-color: blue;
-}
-
-#main-nav > input[type=button]:hover {
-
+#gradient {
+    width: 50vw;
+    height: 100%;
 }
 
 #user-settings {
+    display: flex;
+    align-items: center;
+    justify-content: right;
 
+    height: 100%;
+    width: 4vw;
+    background-color: white;
+}
+
+.page-button {
+    width: 30%;
+    height: 75%;
+
+    background-image: linear-gradient(160deg, #69d6e0, #6f82da, #dd49f8, #ffffff, #ffffff);
+    background-size: 500%;
+    background-position: 100%, 100%;
+
+    border-radius: 0.4vw;
+    border: none;
+    font-size: 2.5vh;
+
+    transition: 0.3s;
+}
+
+.not-selected:hover {
+    cursor: pointer;
+    background-size: 300%;
+    background-position: 0, 0;
+    filter: drop-shadow(0 4px 6px #aeaeae);
+    color: white;
+
+    transform: translate(0, -4px);
+
+    transition: 0.5s;
+}
+
+.not-selected:active {
+    transform: translate(0, 0);
+    filter: none;
+    box-shadow: 0 0 8px #5e5e5e inset;
+    background-position: 10%, 10%;
+
+    transition: 0.1s;
+}
+
+.settings-link {
+    margin-left: 12px;
+    margin-right: 12px;
+    padding: 1vh;
+    border-radius: 0.4vw;
+
+    font-size: 3vh;
+    color: black;
+    text-decoration: none;
+
+    transition: 0.1s;
+}
+
+.settings-link:hover {
+    background-color: white;
+    box-shadow: 0 0 8px #5e5e5e;
+
+    transform: translate(0, -4px);
+
+    transition: 0.1s;
+}
+
+.settings-link:active {
+
+    transform: translate(0, 0) scale(0.9);
+
+    transition: 0.1s;
 }

@@ -19,14 +19,15 @@
 
         <div id="main-menu">
             <form action="" method="post" id="main-nav">
-                <input type="button" value="Panel">
-                <input type="button" value="Settings">
+                <input type="button" value="Panel" class="poppins-bold page-button">
+                <input type="button" value="Settings" class="poppins-bold page-button not-selected">
+                <input type="button" value="Filler" class="poppins-bold page-button not-selected">
             </form>
         </div>
 
         <div id="user-settings">
-            <a href="../index.html">Home</a>
-            <a href="login.php?logout=true">Logout</a>
+            <a href="../index.html" class="poppins-black settings-link">Home</a>
+            <a href="login.php?logout=true" class="poppins-black settings-link">Logout</a>
         </div>
     </nav>
 </body>
