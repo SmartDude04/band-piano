@@ -99,9 +99,8 @@ input[type=submit]:hover {
     margin-bottom: -0.5vh;
     cursor: pointer;
 
-    border-radius: 35px;
 
-    box-shadow: 0 4px 8px #939393;
+    filter: drop-shadow(0 4px 8px #939393);
 
     padding-top: 5px;
     font-size: 1.9vw;
@@ -180,9 +179,8 @@ input[type=submit]:hover {
     margin-bottom: 0 !important;
     cursor: auto !important;
 
-    border-radius: 25px !important;
 
-    box-shadow: none !important;
+    filter: drop-shadow(0 0 0 #939393) !important;
 
     padding-top: 6px !important;
     font-size: 1.6vw !important;
