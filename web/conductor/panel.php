@@ -16,6 +16,18 @@
         <a href="panel.php" id="logo-container">
             <img src="../img/band-piano-logo.png" id="logo" alt="Band Piano Logo" >
         </a>
+
+        <div id="main-menu">
+            <form action="" method="post" id="main-nav">
+                <input type="button" value="Panel">
+                <input type="button" value="Settings">
+            </form>
+        </div>
+
+        <div id="user-settings">
+            <a href="../index.html">Home</a>
+            <a href="login.php?logout=true">Logout</a>
+        </div>
     </nav>
 </body>
 </html>

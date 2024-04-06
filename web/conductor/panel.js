@@ -1,6 +1,6 @@
 window.onload = function() {
-    document.getElementById("logo").addEventListener("mousemove", imageHover);
-    document.getElementById("logo").addEventListener("mouseout", imageRelease);
+    // document.getElementById("logo").addEventListener("mousemove", imageHover);
+    // document.getElementById("logo").addEventListener("mouseout", imageRelease);
 }
 
 function imageHover(e) {

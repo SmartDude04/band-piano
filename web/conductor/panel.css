@@ -6,16 +6,72 @@ body {
 nav {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     background-color: lightgray;
 
-    height: 7.5vh;
-    padding: 1.5vh;
+    height: 6vh;
+    padding: 1.5vh 1vh 1vh;
 }
 
 #logo-container {
     display: contents;
 }
 
+#logo {
+    max-height: 100%;
+    border-radius: 0.8vw;
+
+    transition: 0.05s;
+}
+
 #logo:hover {
-    filter: drop-shadow(0 2px 6px #636363);
+    filter: drop-shadow(0 4px 6px #838383);
+    transform: scale(1.1);
+
+    background-color: white;
+
+    transition: 0.05s;
+}
+
+#main-menu {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    width: 50vw;
+    height: 100%;
+    border-radius: 0.8vw;
+
+    background-image: linear-gradient(160deg, #69d6e0, #6f82da, #dd49f8);
+    background-size: 100%;
+
+    transition: 0.05s;
+}
+
+#main-menu:hover {
+    transform: scale(1.03);
+    filter: drop-shadow(0 4px 6px #838383);
+    backface-visibility: hidden;
+
+    transition: 0.05s;
+}
+
+#main-nav {
+    display: contents;
+}
+
+#main-nav > input[type=button] {
+    width: 20%;
+    height: 75%;
+
+    background-color: blue;
+}
+
+#main-nav > input[type=button]:hover {
+
+}
+
+#user-settings {
+
 }
