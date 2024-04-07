@@ -124,6 +124,7 @@ input[type=submit]:active {
     justify-content: center;
     flex-direction: column;
     height: 100vh;
+
 }
 
 #login-panel {
@@ -196,4 +197,29 @@ input[type=submit]:active {
     font-size: 1.6vw !important;
 
     transition: 0s !important;
+}
+
+.logo {
+    position: absolute;
+    margin: 1vw;
+
+    width: 10vh;
+    height: 10vh;
+
+    z-index: 1;
+
+    transition: 0.1s;
+}
+
+.logo:hover {
+    transform: scale(1.1) rotate(-3deg) translate(0, -2px);
+    filter: drop-shadow(2px 4px 6px #616161);
+
+    transition: 0.1s;
+}
+
+.logo:active {
+    transform: scale(0.9) rotate(-3deg) translate(0, -2px);
+
+    transition: 0.05s;
 }
