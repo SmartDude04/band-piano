@@ -1,5 +1,12 @@
 <?php
 
+// Prevent direct access to this page without going through index.php
+if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) {
+    header('HTTP/1.0 403 Forbidden', TRUE, 403);
+    die();
+}
+
+
 $page = "panel";
 
 if (isset($_GET["panel"])) {
@@ -28,11 +35,12 @@ if (isset($_GET["panel"])) {
         <img src="../../img/band-piano-logo.png" id="logo" alt="Band Piano Logo" >
     </a>
 
+
     <div id="main-menu">
         <form id="main-nav">
             <input name="panel" <?php if($page == "panel") {echo "disabled";} ?> type="submit" value="Panel" class="poppins-bold page-button <?php if($page != "panel") {echo "not-selected";} ?>">
             <input name="panel" <?php if($page == "settings") {echo "disabled";} ?> type="submit" value="Settings" class="poppins-bold page-button <?php if($page != "settings") {echo "not-selected";} ?>">
-            <input name="panel" <?php if($page == "filler") {echo "disabled";} ?> type="submit" value="Filler" class="poppins-bold page-button not-selected <?php if($page != "filler") {echo "not-selected";} ?>">
+            <input name="panel" <?php if($page == "instruments") {echo "disabled";} ?> type="submit" value="Instruments" class="poppins-bold page-button not-selected <?php if($page != "filler") {echo "not-selected";} ?>">
         </form>
     </div>
 
@@ -42,7 +50,7 @@ if (isset($_GET["panel"])) {
     </div>
 </nav>
 
-<div class="content">
+<main class="content">
 
     <?php
 
@@ -51,12 +59,15 @@ if (isset($_GET["panel"])) {
     } else if ($page == "settings") {
         include "core/settings.php";
     } else if ($page == "filler") {
-        include "core/filler.php";
+        include "core/instruments.php";
     }
 
     ?>
 
-</div>
+</main>
 
+<div class="footer">
+    <h1 class="poppins-bold" >View this project's source code on <a href="https://github.com/SmartDude04/band-piano?tab=readme-ov-file">GitHub</a></h1>
+</div>
 </body>
 </html>
