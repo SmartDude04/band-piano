@@ -78,7 +78,7 @@ input[type=submit] {
     background: linear-gradient(135deg, #69d6e0, #6f82da, #dd49f8);
 
     width: 16vw;
-    height: 6vh;
+    height: 3.25vw;
 
     margin-top: 2vh;
     padding: 6px;
@@ -185,7 +185,7 @@ input[type=submit]:active {
 
 .button-disabled:hover {
     width: 16vw !important;
-    height: 6vh !important;
+    height: 3.25vw !important;
     margin-top: 2vh !important;
     margin-bottom: 0 !important;
     cursor: auto !important;
@@ -199,6 +199,12 @@ input[type=submit]:active {
     transition: 0s !important;
 }
 
+.logo-container {
+    display: block;
+    width: 100vw;
+    background-color: white;
+}
+
 .logo {
     position: absolute;
     margin: 1vw;
@@ -207,6 +213,7 @@ input[type=submit]:active {
     height: 10vh;
 
     z-index: 1;
+
 
     transition: 0.1s;
 }

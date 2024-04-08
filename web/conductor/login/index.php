@@ -61,9 +61,11 @@ if (isset($_POST["submit"]) && isset($_POST["username"]) && isset($_POST["passwo
 </head>
 <body>
 
-<a href="../../index.html">
-    <img src="../../img/band-piano-logo.png" alt="Link to Homepage" class="logo" >
-</a>
+<div class="logo-container">
+    <a href="../../index.html">
+        <img src="../../img/band-piano-logo.png" alt="Link to Homepage" class="logo" >
+    </a>
+</div>
 
 <div id="login-container">
     <div id="login-panel" class="poppins-bold">

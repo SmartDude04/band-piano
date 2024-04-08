@@ -24,6 +24,7 @@ if (isset($_GET["panel"])) {
     <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
 
     <script src="panel.js"></script>
+    <script src="core/conductor.js"></script>
 
     <link rel="stylesheet" href="panel.css?v=<?php echo rand(0, 1000); ?>">
     <link rel="stylesheet" href="../../global.css">
@@ -31,7 +32,7 @@ if (isset($_GET["panel"])) {
 </head>
 <body>
 <nav>
-    <a href="panel.php" id="logo-container">
+    <a href="index.php" id="logo-container">
         <img src="../../img/band-piano-logo.png" id="logo" alt="Band Piano Logo" >
     </a>
 
