@@ -22,10 +22,13 @@ if (isset($_GET["panel"])) {
     <meta charset="UTF-8">
     <title>Conductor Panel &bull; Band Piano</title>
     <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
-
     <script src="panel.js"></script>
-    <script src="core/conductor.js"></script>
 
+    <?php
+    if ($page == "panel") {
+        echo "<script src='core/conductor.js'></script>";
+    }
+    ?>
     <link rel="stylesheet" href="panel.css?v=<?php echo rand(0, 1000); ?>">
     <link rel="stylesheet" href="../../global.css">
 
