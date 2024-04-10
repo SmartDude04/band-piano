@@ -34,6 +34,6 @@ function handleInput(event) {
     fetch(`../../lib/send-note.php?note=${note}&pressed=${pressed}`).then((val) => {
         val.text().then((text) => {
             console.log(text);
-        })
+        });
     });
 }

@@ -6,6 +6,7 @@
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
     <link rel="stylesheet" href="selection.css">
     <link rel="stylesheet" href="global.css">
+    <script src="scripts.js"></script>
 
 
     <!--    Google Fonts-->
@@ -16,24 +17,30 @@
     <title>Home &bull; Band Piano</title>
 </head>
 <body>
-<div id="big-box" class="poppins-bold">
+<div class="img-container">
+    <!--    Image from FreePik-->
+    <img src="img/music-background.jpg" alt="Background Logo" id="background">
+</div>
 
-    <h1 id="main-header">Select A View:</h1>
+<div class="content">
+    <div class="flex-container">
+        <div class="poppins-bold main-box">
+            <h1 class="main-header poppins-black">Select A View:</h1>
 
-    <div id="person-selection">
-        <a href="player/index.php" class="button-link"><button class="selection-button poppins-bold">Player</button></a>
-        <a href="conductor/login/index.php" class="button-link"><button class="selection-button poppins-bold">Conductor</button></a>
+            <div class="person-selection">
+                <a href="player/index.php" class="button-link"><button class="selection-button poppins-bold">Player</button></a>
+                <a href="conductor/login/index.php" class="button-link"><button class="selection-button poppins-bold">Conductor</button></a>
+            </div>
+        </div>
     </div>
 
-
-</div>
-<div id="footer">
-    <h1 class="poppins-bold">
-        SmartDude04 &bull;
-        <a href="https://github.com/SmartDude04/band-piano?tab=readme-ov-file" class="link">GitHub Repo</a>
-         &bull; Free to <a href="https://opensource.org/license/mit" class="link">modify and distribute</a>
-    </h1>
-
+    <div class="footer">
+        <h1 class="poppins-bold">
+            SmartDude04 &bull;
+            <a href="https://github.com/SmartDude04/band-piano?tab=readme-ov-file" class="link">GitHub Repo</a>
+             &bull; Free to <a href="https://opensource.org/license/mit" class="link">modify and distribute</a>
+        </h1>
+    </div>
 </div>
 </body>
 </html>
