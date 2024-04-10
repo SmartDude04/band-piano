@@ -29,12 +29,13 @@ body {
 }
 
 img {
-    max-width: 100%;
+    filter: blur(6px);
+
+    max-height: 100%;
+    max-width: 500%;
 
     height: auto;
     width: auto;
-
-    filter: blur(4px);
 }
 
 .img-container {
@@ -109,9 +110,9 @@ img {
 
 
 /*Adjust size based on screen size*/
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .main-box {
-        width: 90%;
+        width: 80%;
         height: 50vh;
     }
 
@@ -142,19 +143,9 @@ img {
 
         transition: 0.1s;
     }
-
-    img {
-        max-height: 50%;
-        max-width: 500%;
-
-        height: auto;
-        width: auto;
-
-        filter: blur(4px);
-    }
 }
 
-@media (min-width: 768px) {
+@media screen and (min-width: 768px) {
     .main-box {
         width: 50%;
         height: 50vh;
