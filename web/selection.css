@@ -97,6 +97,7 @@ img {
 }
 
 .selection-button:hover {
+    cursor: pointer;
     transform: translate(0, -6px);
     transition: 0.1s;
 

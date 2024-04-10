@@ -8,9 +8,7 @@ document.getElementById("main").addEventListener("mousemove", function(event) {
     let xOffset = mouseX - width / 2;
     let yOffset = mouseY - height / 2;
 
-    let translateFactor = 16;
+    let translateFactor = 24;
 
     document.getElementById("background").style.transform = `translate(${xOffset / translateFactor}px, ${yOffset / translateFactor}px)`;
-
-    console.log(xOffset, yOffset);
 });
