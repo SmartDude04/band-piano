@@ -36,6 +36,8 @@ img {
 
     height: auto;
     width: auto;
+
+    overflow: hidden;
 }
 
 .img-container {

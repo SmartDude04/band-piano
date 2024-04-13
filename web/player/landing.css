@@ -59,9 +59,9 @@
 
 .selection-box {
     width: 80%;
-    height: 80%;
+    height: 85%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
     flex-direction: column;
 
@@ -79,21 +79,29 @@
 
 .buttons {
     width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: end;
+    height: 20vw;
+    padding: 8px;
+
+    background-color: #eaeaea;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    justify-items: center;
     align-items: center;
-    height: 10vw;
+
+    box-shadow: 0 0 8px #5c5c5c;
+    border-radius: 16px;
+
 }
 
 .buttons button {
-    font-size: 3vw;
+    font-size: 2vw;
     color: white;
     cursor: pointer;
 
-    width: 20%;
     margin: 0.25vw;
-    height: 100%;
+    width: 90%;
+    height: 90%;
 
     background-image: linear-gradient(135deg, #cbdf49, #69e06b, #69d6e0, #6f82da, #f8499b, #e4294c);
     background-size: 700% 700%;
