@@ -1,19 +1,17 @@
 CREATE DATABASE `band_piano` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 
-create table band_piano.instruments
+create table instrument_groupings
 (
-    inst_id         int auto_increment
-        primary key,
-    inst_name       varchar(32) not null,
-    inst_key_offset int         not null
+    inst_name  varchar(64) not null,
+    inst_group int         not null
 );
 
-create table band_piano.notes
+create table notes
 (
     note int not null
 );
 
-create table band_piano.sessions
+create table sessions
 (
     sn_username          varchar(32)  not null,
     sn_series_identifier varchar(64)  not null,
@@ -21,7 +19,7 @@ create table band_piano.sessions
     sn_expire            int unsigned not null
 );
 
-create table band_piano.users
+create table users
 (
     usr_id       int auto_increment
         primary key,
