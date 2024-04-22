@@ -43,10 +43,10 @@ if (!isset($_SESSION["instrument"])) {
     </div>
     <div class="flex-container">
         <svg viewBox="0 0 2000 1000" id="staff" preserveAspectRatio="xMidYMid slice">
-            <image href="../img/music-staff.png" x="340" y="100" width="1300" height="800"/>
-            <image transform="rotate(0, 1000, 420)" href="../img/note.svg" x="910" y="-10" width="180" height="500" id="note" opacity="0"/>
-            <image href="../img/flat.svg" x="800" y="715" width="112" height="243" id="flat" opacity="0"/>
-            <image href="../img/sharp.svg" x="760" y="100" width="128" height="410" id="sharp" opacity="0"/>
+            <image href="../img/music-staff.png" x="480" y="250" width="1040" height="640"/>
+            <image transform="rotate(0, 1000, 420)" href="../img/note.svg" x="950" y="40" width="144" height="400" id="note" opacity="1"/>
+            <image href="../img/flat.svg" x="850" y="715" width="90" height="194" id="flat" opacity="1"/>
+            <image href="../img/sharp.svg" x="810" y="100" width="102" height="328" id="sharp" opacity="1"/>
         </svg>
     </div>
 </div>

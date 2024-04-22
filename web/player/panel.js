@@ -64,10 +64,10 @@ function drawNote(parts) {
     }
 }
 
-setInterval(function() {
-    fetch("../lib/get-note.php")
-        .then(response => response.text())
-        .then((response) => {
-            drawNote(response.split("|"));
-        });
-}, 250);
+// setInterval(function() {
+//     fetch("../lib/get-note.php")
+//         .then(response => response.text())
+//         .then((response) => {
+//             drawNote(response.split("|"));
+//         });
+// }, 250);
