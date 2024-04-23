@@ -100,11 +100,9 @@ img {
 
 .selection-button:hover {
     cursor: pointer;
-    transform: translate(0, -6px);
     transition: 0.1s;
+    transform: scale(1.05);
 
-    box-shadow: 0 4px 12px #555555;
-    text-shadow: none;
 }
 
 .selection-button:active {
