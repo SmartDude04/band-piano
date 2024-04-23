@@ -18,7 +18,7 @@ if (!isset($_SESSION["instrument"])) {
     <title>Player Panel &bull; Band Piano</title>
     <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
 
-    <script src="panel.js" defer></script>
+    <script src="panel.js?v=<?php echo rand(0, 10000);?>" defer></script>
 
 
     <link rel="stylesheet" href="panel.css?v=<?php echo rand(0, 10000);?>">
@@ -42,11 +42,13 @@ if (!isset($_SESSION["instrument"])) {
         <a href="../index.html" class="home poppins-black">Band Piano</a>
     </div>
     <div class="flex-container">
-        <svg viewBox="0 0 2000 1000" id="staff" preserveAspectRatio="xMidYMid slice">
-            <image href="../img/music-staff.png" x="480" y="250" width="1040" height="640"/>
-            <image transform="rotate(0, 1000, 420)" href="../img/note.svg" x="950" y="40" width="144" height="400" id="note" opacity="1"/>
-            <image href="../img/flat.svg" x="850" y="715" width="90" height="194" id="flat" opacity="1"/>
-            <image href="../img/sharp.svg" x="810" y="100" width="102" height="328" id="sharp" opacity="1"/>
+        <svg viewBox="0 0 2000 1100" id="staff" preserveAspectRatio="xMidYMid slice">
+            <image href="../img/music-staff.png" x="480" y="350" width="1040" height="640"/>
+            <image transform="rotate(0, 1000, 420)" href="../img/note.svg" x="950" y="40" width="144" height="400" id="note" opacity="0"/>
+            <image href="../img/flat.svg" x="850" y="715" width="99" height="213" id="flat" opacity="0"/>
+            <image href="../img/sharp.svg" x="800" y="100" width="120" height="328" id="sharp" opacity="0"/>
+            <rect id="bar" width="220" height="20" x="910" y="200" fill="black" opacity="0"/>
+            <rect id="bar2" width="220" height="20" x="910" y="200" fill="black" opacity="0"/>
         </svg>
     </div>
 </div>
