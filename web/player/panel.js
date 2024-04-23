@@ -14,32 +14,36 @@ function drawNote(parts) {
     let note = document.getElementById("note");
     let sharp = document.getElementById("sharp");
     let flat = document.getElementById("flat");
+    let bar = document.getElementById("bar");
+    let bar2 = document.getElementById("bar2");
 
     if (position === -1) {
         // Remove the note in this case
         note.style.opacity = "0";
         sharp.style.opacity = "0";
         flat.style.opacity = "0";
+        bar.style.opacity = "0";
+        bar2.style.opacity = "0";
         return;
     } else {
         note.style.opacity = "1";
     }
 
 
-    // Defines the coords to move for each step, starting at point 0
-    let positionSteps = [460, 385, 302, 230, 147, 70, -10, -85, -165, -240, -320];
-    let flatOffset = 255;
-    let sharpOffset = 225;
-
-    // Amounts to use to rotate the note around the correct point
-    let rotateYOffset = 430;
-
     // Determine the orientation of the note
     let upwards = position <= 4;
 
+    // Defines the coords to move for each step, starting at point 0
+    let positionSteps = [640, 582, 515, 458, 390, 220, 150, 95, 25, -35, -100, -150, -210, -270, -330];
+    let flatOffset = upwards ? 190 : 300;
+    let sharpOffset = upwards ? 183 : 293;
+
+    // Amounts to use to rotate the note around the correct point
+    let rotateYOffset = 400;
+
     note.setAttribute("y", positionSteps[position].toString());
     if (!upwards) {
-        note.setAttribute("transform", `rotate(180, 1000, ${positionSteps[position] + rotateYOffset})`);
+        note.setAttribute("transform", `rotate(180, 1025, ${positionSteps[position] + rotateYOffset})`);
     } else {
         note.setAttribute("transform", "");
     }
@@ -62,12 +66,39 @@ function drawNote(parts) {
         // Hide the sharp sign
         sharp.style.opacity = "0";
     }
+
+    // Add a bar for the higher notes
+    if (position > 10) {
+        bar.style.opacity = "1";
+
+        if (position % 2 === 0) {
+            // Bar should be under the note
+            bar.setAttribute("y", `${positionSteps[position] + 510}`);
+        } else {
+            bar.setAttribute("y", `${positionSteps[position] + 450}`);
+        }
+
+        if (position > 12) {
+            bar2.style.opacity = "1";
+            // Add the second bar
+            if (position % 2 === 0) {
+                // Bar should be under the note
+                bar2.setAttribute("y", `${positionSteps[position] + 630}`);
+            } else {
+                bar2.setAttribute("y", `${positionSteps[position] + 570}`);
+            }
+        }
+    } else {
+        // Remove the bar
+        bar.style.opacity = "0";
+        bar2.style.opacity = "0";
+    }
 }
 
-// setInterval(function() {
-//     fetch("../lib/get-note.php")
-//         .then(response => response.text())
-//         .then((response) => {
-//             drawNote(response.split("|"));
-//         });
-// }, 250);
+setInterval(function() {
+    fetch("../lib/get-note.php")
+        .then(response => response.text())
+        .then((response) => {
+            drawNote(response.split("|"));
+        });
+}, 250);
