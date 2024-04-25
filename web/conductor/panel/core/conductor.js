@@ -31,9 +31,12 @@ function handleInput(event) {
     let note = data[1];
     let pressed = data[2] !== 0;
 
-    fetch(`../../lib/send-note.php?note=${note}&pressed=${pressed}`).then((val) => {
-        val.text().then((text) => {
-            console.log(text);
+    // Make sure the note isn't a slider as that may overwhelm the server
+    if (note > 1) {
+        fetch(`../../lib/send-note.php?note=${note}&pressed=${pressed}`).then((val) => {
+            val.text().then((text) => {
+                console.log(text);
+            });
         });
-    });
+    }
 }
