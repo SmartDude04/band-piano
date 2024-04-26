@@ -22,10 +22,10 @@ function return_for_treble_c($note): string {
 
     // Prepare the correct accidental (sharp/flat) to display with the note
     $accidental_notes = [1, 3, 6, 8, 10];
-    if (array_search($note % 12, $accidental_notes) > -1) {
+    if (is_int(array_search($note % 12, $accidental_notes))) {
         $newNote -= array_search($note % 12, $accidental_notes);
         $accidentals = "|true|false";
-    } else {
+    }else {
         $accidentals = "|false|false";
 
         // Adjust down the note for the accidentals
@@ -84,6 +84,9 @@ function return_for_bass_c($note): string {
     if (array_search($note % 12, $accidental_notes) > -1) {
         $newNote -= array_search($note % 12, $accidental_notes);
         $accidentals = "|true|false";
+    } else if ($note % 12 == 11) {
+        $newNote -= 5;
+        $accidentals = "|false|false";
     } else {
         $accidentals = "|false|false";
 
@@ -99,13 +102,13 @@ function return_for_bass_c($note): string {
     }
 
     // Transposition change
-    $newNote -= 1;
+    $newNote += 4;
 
-    $newNote -= 48;
+    while ($newNote > 14) {
+        $newNote -= 12;
+    }
 
-    return $newNote;
-
-    if ($note < 59 && $note > 48) {
+    if ($note < 60 && $note > 52) {
         $newNote -= 12;
 
         // Adjust for accidentals
@@ -117,16 +120,137 @@ function return_for_bass_c($note): string {
 
     }
 
-
-    if ($note > 70 && $note < 75) {
+    if ($note > 71 && $note < 78) {
         $newNote += 12;
 
         // Adjust for accidentals
         $note += $noteChanges;
-        // $newNote -= array_search($note % 12, $accidental_notes);
+        $newNote -= array_search($note % 12, $accidental_notes);
 
         // No idea why this is needed, but it works
-//        $newNote -= 5 - array_search($note % 12, $accidental_notes);
+        $newNote -= 5 - array_search($note % 12, $accidental_notes);
+    }
+
+    return $newNote . $accidentals;
+}
+
+function return_for_b_flat($note): string {
+
+    // Make the note work for treble clef in C
+    $newNote = $note;
+    $noteChanges = 0;
+
+    // Prepare the correct accidental (sharp/flat) to display with the note
+    $accidental_notes = [1, 3, 6, 8, 10];
+    if (array_search($note % 12, $accidental_notes) > -1) {
+        $newNote -= array_search($note % 12, $accidental_notes);
+        $accidentals = "|true|false";
+    } else if ($note % 12 == 11) {
+        $newNote -= 5;
+        $accidentals = "|false|false";
+    } else {
+        $accidentals = "|false|false";
+
+        // Adjust down the note for the accidentals
+        while (!is_int(array_search($note % 12, $accidental_notes))) {
+            $note++;
+            $noteChanges++;
+        }
+        $newNote -= array_search($note % 12, $accidental_notes);
+
+        // Put $note back to where it was before
+        $note -= $noteChanges;
+    }
+
+    // Transposition change
+    $newNote += 7;
+
+    while ($newNote > 14) {
+        $newNote -= 12;
+    }
+
+    if ($note < 60) {
+        $newNote -= 12;
+
+        // Adjust for accidentals
+        $note += $noteChanges;
+        $newNote += array_search($note % 12, $accidental_notes);
+
+        // No idea why this is needed, but it works
+        $newNote += 5 - array_search($note % 12, $accidental_notes);
+
+    }
+
+    if ($note < 48 && $note > 46) {
+        $newNote -= 12;
+
+        // Adjust for accidentals
+        $note += $noteChanges;
+        $newNote += array_search($note % 12, $accidental_notes);
+
+        // No idea why this is needed, but it works
+        $newNote += 5 - array_search($note % 12, $accidental_notes);
+    }
+
+    return $newNote . $accidentals;
+}
+
+function return_for_e_flat($note): string {
+
+    // Make the note work for treble clef in C
+    $newNote = $note;
+    $noteChanges = 0;
+
+    // Prepare the correct accidental (sharp/flat) to display with the note
+    $accidental_notes = [1, 3, 6, 8, 10];
+    if (array_search($note % 12, $accidental_notes) > -1) {
+        $newNote -= array_search($note % 12, $accidental_notes);
+        $accidentals = "|true|false";
+    } else if ($note % 12 == 11) {
+        $newNote -= 5;
+        $accidentals = "|false|false";
+    } else {
+        $accidentals = "|false|false";
+
+        // Adjust down the note for the accidentals
+        while (!is_int(array_search($note % 12, $accidental_notes))) {
+            $note++;
+            $noteChanges++;
+        }
+        $newNote -= array_search($note % 12, $accidental_notes);
+
+        // Put $note back to where it was before
+        $note -= $noteChanges;
+    }
+
+    // Transposition change
+    $newNote += 8;
+
+    while ($newNote > 14) {
+        $newNote -= 12;
+    }
+
+    if ($note < 60) {
+        $newNote -= 12;
+
+        // Adjust for accidentals
+        $note += $noteChanges;
+        $newNote += array_search($note % 12, $accidental_notes);
+
+        // No idea why this is needed, but it works
+        $newNote += 5 - array_search($note % 12, $accidental_notes);
+
+    }
+
+    if ($note < 48 && $note > 46) {
+        $newNote -= 12;
+
+        // Adjust for accidentals
+        $note += $noteChanges;
+        $newNote += array_search($note % 12, $accidental_notes);
+
+        // No idea why this is needed, but it works
+        $newNote += 5 - array_search($note % 12, $accidental_notes);
     }
 
     return $newNote . $accidentals;
