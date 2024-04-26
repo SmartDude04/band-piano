@@ -28,7 +28,7 @@ function handleInput(event) {
     let data = event.data;
 
     // Get data to send to the database
-    let note = data[1];
+    let note = data[1] + 12;
     let pressed = data[2] !== 0;
 
     // Make sure the note isn't a slider as that may overwhelm the server
