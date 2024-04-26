@@ -49,16 +49,16 @@ if (isset($_POST["instrument"])) {
                 <button type="submit" name="instrument" class="poppins-bold" value="clarinet">Clarinet</button>
                 <button type="submit" name="instrument" class="poppins-bold" value="alto_sax">Alto Sax</button>
                 <button type="submit" name="instrument" class="poppins-bold" value="tenor_sax">Tenor Sax</button>
-                <button type="submit" name="instrument" class="poppins-bold" value="bari-sax">Bari Sax</button>
-                <button type="submit" name="instrument" class="poppins-bold" value="bassoon">Bassoon</button>
-                <button type="submit" name="instrument" class="poppins-bold" value="bass_clarinet">B. Clarinet</button>
-                <button type="submit" name="instrument" class="poppins-bold" value="trombone_1">Trombone 1</button>
-                <button type="submit" name="instrument" class="poppins-bold" value="trombone_2">Trombone 2</button>
                 <button type="submit" name="instrument" class="poppins-bold" value="trumpet_1">Trumpet 1</button>
                 <button type="submit" name="instrument" class="poppins-bold" value="trumpet_2">Trumpet 2</button>
                 <button type="submit" name="instrument" class="poppins-bold" value="trumpet_3">Trumpet 3</button>
-                <button type="submit" name="instrument" class="poppins-bold" value="tuba">Tuba</button>
+                <button type="submit" name="instrument" class="poppins-bold" value="trombone_1">Trombone 1</button>
+                <button type="submit" name="instrument" class="poppins-bold" value="trombone_2">Trombone 2</button>
                 <button type="submit" name="instrument" class="poppins-bold" value="baritone">Baritone</button>
+                <button type="submit" name="instrument" class="poppins-bold" value="bari-sax">Bari Sax</button>
+                <button type="submit" name="instrument" class="poppins-bold" value="bassoon">Bassoon</button>
+                <button type="submit" name="instrument" class="poppins-bold" value="bass_clarinet">B. Clarinet</button>
+                <button type="submit" name="instrument" class="poppins-bold" value="tuba">Tuba</button>
             </form>
         </div>
     </div>
