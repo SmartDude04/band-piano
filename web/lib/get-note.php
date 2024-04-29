@@ -38,6 +38,13 @@ $keys = [
 require "get-note-helper.php";
 session_start();
 $instrument = $_SESSION['instrument'];
+
+// Make an array of notes
+$notes = [];
+foreach ($note_rows as $row) {
+    $notes[] = $row;
+}
+
 // Get the set group for the current instrument
 $groupings = $conn->query("SELECT inst_group FROM instrument_groupings WHERE inst_name = '$instrument'");
 $groupings = $groupings->fetch_row();
