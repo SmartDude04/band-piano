@@ -6,11 +6,11 @@ $conn = db_connect();
 
 // Get all notes from the database
 // Desc because groups go from highest to lowest but higher pitches are higher values
-$notes = $conn->query("SELECT note FROM notes ORDER BY note desc");
+$note_result = $conn->query("SELECT note FROM notes ORDER BY note desc");
 
 // Get an array of notes as a numerical array
-$notes = $notes->fetch_all();
-$num_notes = count($notes);
+$note_rows = $note_result->fetch_all();
+$num_notes = count($note_rows);
 
 if ($num_notes == 0) {
     echo "-1|false|false";
@@ -35,14 +35,12 @@ $keys = [
     "tuba" => "c_bass",
 ];
 
-$bass_clef = ["tuba", "trombone_1", "trombone_2", "baritone"];
-
 require "get-note-helper.php";
 session_start();
 $instrument = $_SESSION['instrument'];
 // Get the set group for the current instrument
 $groupings = $conn->query("SELECT inst_group FROM instrument_groupings WHERE inst_name = '$instrument'");
-$groupings = $groupings->fetch_all();
+$groupings = $groupings->fetch_row();
 $current_group = $groupings[0];
 
 // Get the single note that we need to play
