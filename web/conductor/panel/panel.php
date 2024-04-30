@@ -31,6 +31,7 @@ if (isset($_GET["panel"])) {
     ?>
     <link rel="stylesheet" href="panel.css?v=<?php echo rand(0, 1000); ?>">
     <link rel="stylesheet" href="../../global.css">
+    <link rel="stylesheet" href="core/core.css?v=<?php echo rand(0, 1000); ?>">
 
 </head>
 <body>
@@ -62,7 +63,7 @@ if (isset($_GET["panel"])) {
         include "core/conductor.php";
     } else if ($page == "settings") {
         include "core/settings.php";
-    } else if ($page == "filler") {
+    } else if ($page == "instruments") {
         include "core/instruments.php";
     }
 

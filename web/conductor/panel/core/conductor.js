@@ -23,6 +23,31 @@ function onMIDISuccess(midiAccess) {
     });
 }
 
+function displayNote(note, pressed) {
+    let key = document.getElementById("key-" + note);
+    let flats = [1, 3, 6, 8, 10];
+
+    if (pressed) {
+        // Determine the color to set the note to
+        if (flats.includes(note % 12)) {
+            key.style.fill = "#2f75ef";
+        } else {
+            key.style.fill = "#89d7ff";
+        }
+    } else {
+        // Determine the color to put the key back to
+        if (flats.includes(note % 12)) {
+            key.style.fill = "#000000";
+        } else {
+            key.style.fill = "#ffffff";
+        }
+    }
+}
+
+function updateLatency(latency) {
+
+}
+
 // Called when a MIDI input is detected
 function handleInput(event) {
     let data = event.data;
@@ -35,8 +60,20 @@ function handleInput(event) {
     if (note > 1) {
         fetch(`../../lib/send-note.php?note=${note}&pressed=${pressed}`).then((val) => {
             val.text().then((text) => {
-                console.log(text);
+                displayNote(note, pressed);
             });
         });
     }
 }
+
+setInterval(() => {
+    let currentTime = Date.now();
+    fetch("../../lib/ping.php").then((val) => {
+        val.text().then((response) => {
+            let responseNum = parseFloat(response) * 1000;
+            responseNum = parseInt(responseNum.toString());
+
+            updateLatency(responseNum - currentTime);
+        })
+    })
+}, 1000);
