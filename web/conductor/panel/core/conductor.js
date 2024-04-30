@@ -1,6 +1,27 @@
 // Requests MIDI access from the browser
 navigator.requestMIDIAccess({ sysex: false }).then(onMIDISuccess, onMIDIFailure);
 
+window.onload = function() {
+    for (let i = 47; i <= 84; i++) {
+        let key = document.getElementById("key-" + i);
+        key.addEventListener("mousedown", function () {
+            fetch(`../../lib/send-note.php?note=${i}&pressed=${true}`).then((val) => {
+                val.text().then(() => {
+                    displayNote(i, true);
+                });
+            });
+        });
+
+        key.addEventListener("mouseup", function () {
+            fetch(`../../lib/send-note.php?note=${i}&pressed=${false}`).then((val) => {
+                val.text().then(() => {
+                    displayNote(i, false);
+                });
+            });
+        });
+    }
+}
+
 // Gets called if a MIDI error occurs
 function onMIDIFailure(msg) {
     console.error(`Failed to get MIDI access - ${msg}`);
@@ -44,10 +65,6 @@ function displayNote(note, pressed) {
     }
 }
 
-function updateLatency(latency) {
-
-}
-
 // Called when a MIDI input is detected
 function handleInput(event) {
     let data = event.data;
@@ -59,21 +76,9 @@ function handleInput(event) {
     // Make sure the note isn't a slider as that may overwhelm the server
     if (note > 1) {
         fetch(`../../lib/send-note.php?note=${note}&pressed=${pressed}`).then((val) => {
-            val.text().then((text) => {
+            val.text().then(() => {
                 displayNote(note, pressed);
             });
         });
     }
 }
-
-setInterval(() => {
-    let currentTime = Date.now();
-    fetch("../../lib/ping.php").then((val) => {
-        val.text().then((response) => {
-            let responseNum = parseFloat(response) * 1000;
-            responseNum = parseInt(responseNum.toString());
-
-            updateLatency(responseNum - currentTime);
-        })
-    })
-}, 1000);
