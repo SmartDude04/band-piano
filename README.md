@@ -1,5 +1,5 @@
 # Band Piano
-### An idea based off Jacob Collier's [MIT visit](https://www.youtube.com/watch?v=LdtK_oiyJAo)
+### An idea based off Jacob Collier's [MIT visit](https://youtu.be/LdtK_oiyJAo?si=21nQyqail7QYp5wE)
 
 In the video, he has a site where he can send notes to members of the band from a MIDI keyboard in the front
 
