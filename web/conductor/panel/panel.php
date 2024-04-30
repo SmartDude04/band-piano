@@ -45,7 +45,7 @@ if (isset($_GET["panel"])) {
         <form id="main-nav">
             <input name="panel" <?php if($page == "panel") {echo "disabled";} ?> type="submit" value="Panel" class="poppins-bold page-button <?php if($page != "panel") {echo "not-selected";} ?>">
             <input name="panel" <?php if($page == "settings") {echo "disabled";} ?> type="submit" value="Settings" class="poppins-bold page-button <?php if($page != "settings") {echo "not-selected";} ?>">
-            <input name="panel" <?php if($page == "instruments") {echo "disabled";} ?> type="submit" value="Instruments" class="poppins-bold page-button not-selected <?php if($page != "filler") {echo "not-selected";} ?>">
+            <input name="panel" <?php if($page == "instruments") {echo "disabled";} ?> type="submit" value="Instruments" class="poppins-bold page-button <?php if($page != "instruments") {echo "not-selected";} ?>">
         </form>
     </div>
 
