@@ -10,16 +10,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
 require_once("../../lib/authentication.php");
 
 $conn = db_connect();
-$result = $conn->query("SELECT inst_name FROM instrument_groupings");
+$result = $conn->query("SELECT inst_name, inst_group FROM instrument_groupings");
 $rows = $result->fetch_all();
 
 foreach ($rows as $row) {
     // Check if a POST with that instrument is found, for either up or down
     $inst_name = $row[0];
+    $inst_group = $row[1];
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["down-" . $inst_name])) {
         // Handle the POST request for the instrument going down a level
+        $new_group = $inst_group + 1;
+        $conn->execute_query("UPDATE instrument_groupings SET inst_group = '$new_group' WHERE inst_name = '$inst_name'");
+    }
 
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["up-" . $inst_name])) {
+        // Handle the POST request for the instrument going down a level
+        $new_group = $inst_group - 1;
+        $conn->execute_query("UPDATE instrument_groupings SET inst_group = '$new_group' WHERE inst_name = '$inst_name'");
     }
 }
 
@@ -27,28 +35,6 @@ foreach ($rows as $row) {
 ?>
 
 <div class="instrumentation">
-
-    <!--<div class="group">
-        <div class="sections">
-            <h1 class="group-header poppins-black">Group 1</h1>
-            <div class="instruments">
-
-                <div class="instrument">
-                    <h1 class="instrument-name poppins-bold">Trombone</h1>
-
-                    <form method="post" action="" class="buttons">
-                        <button type="submit" name="down" class="move-button">
-                            <img src="../../img/arrow-down.png" alt="down arrow">
-                        </button>
-                        <button type="submit" name="up" class="move-button">
-                            <img src="../../img/arrow-up.png" alt="down arrow">
-                        </button>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </div>-->
 
     <?php
 
@@ -98,13 +84,13 @@ foreach ($rows as $row) {
     ksort($instrument_groups);
 
     // Now that we have an array of instruments and groups, begin creating the HTML to display
-    for ($i = 1; $i <= 10; $i++) {
+    for ($i = 1; $i <= 10; $i = $i > 5 && $i != 10 ? $i - 4 : $i + 5) {
 
         $instruments = $instrument_groups[$i] ?? [];
 
         echo '<div class="group">';
         echo '<div class="sections">';
-        echo '<h1 class="group-header poppins-black">Group ' . $i . '</h1>';
+        echo '<h1 class="group-header poppins-bold">Group ' . $i . '</h1>';
         echo '<div class="instruments">';
 
         foreach ($instruments as $instrument) {
