@@ -109,6 +109,7 @@
     box-shadow: 0 3px 8px #a6a6a6;
     background-color: #6393e8;
     transform: scale(1.1);
+    cursor: pointer;
 
     transition: 0.1s;
 }
@@ -118,6 +119,7 @@
 }
 
 .move-disabled:hover {
+    cursor: not-allowed !important;
     box-shadow: 0 3px 8px #a6a6a6;
     background-color: #e86363 !important;
     transform: scale(0.9) !important;
