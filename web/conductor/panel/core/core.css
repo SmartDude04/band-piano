@@ -17,10 +17,9 @@
 
 .instrumentation {
     width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
 }
 
 .group {
@@ -37,6 +36,9 @@
 .group-header {
     margin: 5px 0 0;
     font-size: 48px;
+    width: 100%;
+    text-align: center;
+    border-bottom: 4px solid black;
 }
 
 .sections {
@@ -106,7 +108,15 @@
 .move-button:hover {
     box-shadow: 0 3px 8px #a6a6a6;
     background-color: #6393e8;
-    transform: translate(0, -2px) scale(1.1);
+    transform: scale(1.1);
+
+    transition: 0.1s;
+}
+
+.move-disabled:hover {
+    box-shadow: 0 3px 8px #a6a6a6;
+    background-color: #e86363 !important;
+    transform: scale(0.9) !important;
 
     transition: 0.1s;
 }
