@@ -239,7 +239,7 @@ function return_for_e_flat($note): string {
         $newNote -= 12;
     }
 
-    if ($note < 61 && $note > 48) {
+    if ($note < 61 && $note > 52) {
         $newNote -= 12;
 
         // Adjust for accidentals
