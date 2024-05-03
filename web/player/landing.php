@@ -58,7 +58,7 @@ if (isset($_POST["instrument"])) {
                 <button type="submit" name="instrument" class="poppins-bold" value="bari-sax">Bari Sax</button>
                 <button type="submit" name="instrument" class="poppins-bold" value="bassoon">Bassoon</button>
                 <button type="submit" name="instrument" class="poppins-bold" value="bass_clarinet">B. Clarinet</button>
-                <button type="submit" name="instrument" class="poppins-bold" value="tuba">Tuba</button>
+                <button type="submit" name="instrument" class="poppins-bold" value="tuba">Tuba/Bass</button>
             </form>
         </div>
     </div>
