@@ -43,7 +43,7 @@ function drawNote(parts) {
 
     note.setAttribute("y", positionSteps[position].toString());
     if (!upwards) {
-        note.setAttribute("transform", `rotate(180, 1025, ${positionSteps[position] + rotateYOffset})`);
+        note.setAttribute("transform", `rotate(180, 1175, ${positionSteps[position] + rotateYOffset})`);
     } else {
         note.setAttribute("transform", "");
     }
