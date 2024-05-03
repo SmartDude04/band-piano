@@ -7,3 +7,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
 }
 
 ?>
+
+
+<div class="settings">
+    <h1 class="title poppins-black">Settings</h1>
+
+    <div class="elements">
+        <div class="element">
+            wdwafwgsfagfdafdahrswh
+        </div>
+        <div class="element">
+            egjkrl
+        </div>
+    </div>
+</div>
