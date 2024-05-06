@@ -27,14 +27,29 @@ if (isset($_GET["panel"])) {
     <?php
     if ($page == "panel") {
         echo "<script src='core/conductor.js'></script>";
+    } else if ($page == "settings") {
+        echo "<script src='core/settings.js' defer></script>";
     }
     ?>
     <link rel="stylesheet" href="panel.css?v=<?php echo rand(0, 1000); ?>">
     <link rel="stylesheet" href="../../global.css">
     <link rel="stylesheet" href="core/core.css?v=<?php echo rand(0, 1000); ?>">
+    <link rel="stylesheet" href="toast.css?v=<?php echo rand(0, 1000); ?>">
 
 </head>
 <body>
+<div class="toast-container" id="toast-container">
+    <div class="toast">
+        <div class="toast-title">
+            <img src="../../img/warning-icon.png" alt="Warning Icon" class="toast-icon">
+            <h1 class="toast-warning poppins-black">Are you Sure?</h1>
+        </div>
+        <div class="toast-buttons">
+            <button class="toast-button poppins-extrabold" id="toast-cancel" onclick="toastCancel()">Cancel</button>
+            <button class="toast-button poppins-extrabold" id="toast-delete" onclick="toastDelete()">Delete</button>
+        </div>
+    </div>
+</div>
 <nav>
     <a href="index.php" id="logo-container">
         <img src="../../img/band-piano-logo.png" id="logo" alt="Band Piano Logo" >

@@ -5,6 +5,18 @@
     display: flex;
 }
 
+#darken {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 50%);
+}
+
+.darken-visible {
+    display: block !important;
+}
+
 .piano {
     border: 4px solid black;
     background-color: white;
@@ -155,10 +167,9 @@
 }
 
 .elements {
-    width: 95%;
+    width: 85%;
     height: 70%;
-    padding-top: 3%;
-    /*border: 2px solid black;*/
+    padding: 3% 5% 0 5%;
     border-radius: 16px;
     box-shadow: 0 0 8px #8e8e8e;
     background-color: white;
@@ -166,4 +177,42 @@
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
+}
+
+.element {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+
+    border-bottom: 2px solid black;
+
+}
+
+.element div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.settings-button {
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 75%;
+    border-radius: 8px;
+    border: none;
+    background-color: lightskyblue;
+    font-size: 1.5vw;
+
+    transition: 0.1s;
+}
+
+.settings-button:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+    box-shadow: 0 0 8px #7c7c7c;
+
+    transition: 0.05s;
 }
