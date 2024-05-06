@@ -175,8 +175,6 @@ main {
     justify-content: center;
     align-items: center;
 
-    border-top-right-radius: 16px;
-    border-top-left-radius: 16px;
     box-shadow: 0 0 8px #838383;
 
     background-color: white;
