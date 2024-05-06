@@ -18,10 +18,10 @@ if (!isset($_SESSION["instrument"])) {
     <title>Player Panel &bull; Band Piano</title>
     <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
 
-    <script src="panel.js?v=<?php echo rand(0, 10000);?>" defer></script>
+    <script src="panel.js" defer></script>
 
 
-    <link rel="stylesheet" href="panel.css?v=<?php echo rand(0, 10000);?>">
+    <link rel="stylesheet" href="panel.css">
     <link rel="stylesheet" href="../global.css">
     <!--    Google Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">

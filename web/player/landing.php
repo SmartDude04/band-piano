@@ -23,7 +23,7 @@ if (isset($_POST["instrument"])) {
     <title>Instrument Selection &bull; Band Piano</title>
     <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
 
-    <link rel="stylesheet" href="landing.css?v=<?php echo rand(0, 10000);?>">
+    <link rel="stylesheet" href="landing.css">
     <link rel="stylesheet" href="../global.css">
     <!--    Google Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
