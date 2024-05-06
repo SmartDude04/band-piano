@@ -31,10 +31,31 @@ function clearNotes() {
 
 }
 
-function toastCancel() {
-
+function removeToast() {
+    // Set the toast container to have a visibility of none
+    document.getElementById("toast-container").style.display = "none";
 }
 
 function toastDelete() {
+    // Send a fetch delete request
+    fetch("../../lib/delete-notes.php")
+        .then(response => response.text())
+        .then(response => {
+            if (response === "true") {
+                confirmation();
+            }
+        });
+}
 
+function confirmation() {
+    // Remove the toast and add the confirmation
+    document.getElementById("toast").style.display = "none";
+    document.getElementById("confirmation").style.display = "flex";
+}
+
+function removeConfirmation() {
+    // Remove the confirmation and set items back to normal for another click
+    document.getElementById("toast-container").style.display = "none";
+    document.getElementById("toast").style.display = "flex";
+    document.getElementById("confirmation").style.display = "none";
 }

@@ -31,23 +31,27 @@ if (isset($_GET["panel"])) {
         echo "<script src='core/settings.js' defer></script>";
     }
     ?>
-    <link rel="stylesheet" href="panel.css?v=<?php echo rand(0, 1000); ?>">
+    <link rel="stylesheet" href="panel.css">
     <link rel="stylesheet" href="../../global.css">
-    <link rel="stylesheet" href="core/core.css?v=<?php echo rand(0, 1000); ?>">
-    <link rel="stylesheet" href="toast.css?v=<?php echo rand(0, 1000); ?>">
+    <link rel="stylesheet" href="core/core.css">
+    <link rel="stylesheet" href="toast.css">
 
 </head>
 <body>
 <div class="toast-container" id="toast-container">
-    <div class="toast">
+    <div class="toast" id="toast">
         <div class="toast-title">
             <img src="../../img/warning-icon.png" alt="Warning Icon" class="toast-icon">
             <h1 class="toast-warning poppins-black">Are you Sure?</h1>
         </div>
         <div class="toast-buttons">
-            <button class="toast-button poppins-extrabold" id="toast-cancel" onclick="toastCancel()">Cancel</button>
+            <button class="toast-button poppins-extrabold" id="toast-cancel" onclick="removeToast()">Cancel</button>
             <button class="toast-button poppins-extrabold" id="toast-delete" onclick="toastDelete()">Delete</button>
         </div>
+    </div>
+    <div class="confirmation" id="confirmation">
+        <h1 class="confirmation-title poppins-black">Notes Deleted Successfully</h1>
+        <button class="confirmation-ok poppins-extrabold" onclick="removeConfirmation()">OK</button>
     </div>
 </div>
 <nav>
