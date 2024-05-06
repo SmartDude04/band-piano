@@ -35,7 +35,7 @@ if (isset($_POST["submit"]) && isset($_POST["username"]) && isset($_POST["passwo
     <meta charset="UTF-8">
     <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
     <title>New Account &bull; Band Piano</title>
-    <link rel="stylesheet" href="login.css?v=<?php echo rand(0, 1000); ?>">
+    <link rel="stylesheet" href="login.css">
     <link rel="stylesheet" href="../../global.css">
     <script src="login.js"></script>
 
