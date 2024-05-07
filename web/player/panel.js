@@ -99,7 +99,6 @@ setInterval(function() {
     fetch("../lib/get-note.php")
         .then(response => response.text())
         .then(response => {
-            console.log(response);
             drawNote(response.split("|"));
         });
 }, 250);

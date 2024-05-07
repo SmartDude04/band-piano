@@ -27,16 +27,8 @@ function onMIDIFailure(msg) {
     console.error(`Failed to get MIDI access - ${msg}`);
 }
 
-// Gets called whe MIDI devices change. Ex: A device is unplugged/plugged in
-function updateDevices(event) {
-    // console.log(event);
-}
-
 // Gets called when a MIDI input device is detected
 function onMIDISuccess(midiAccess) {
-
-    midiAccess.addEventListener("statechange", updateDevices);
-
     const inputs = midiAccess.inputs;
 
     inputs.forEach((input) => {
