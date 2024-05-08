@@ -10,7 +10,7 @@ From the conductors point of view, they will be able to see the notes for each i
 to how the notes are sent to the players
 
 ## Docker
-Plans are to make this a deployable docker container. More info will be provided when that becomes a possibility.
+Plans are to make this a deployable [Docker](https://www.docker.com/) container. More info will be provided when that becomes a possibility.
 \
 \
 Licensed under the [MIT License](https://opensource.org/license/mit). See `LICENSE.md` for details.
