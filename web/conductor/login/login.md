@@ -43,9 +43,9 @@ On the database, a table of tokens stores four pieces of data:
 ### Generation:
 1. Upon verification of a password, a cookie and database record will be created
 2. Three variables will be created from either new or existing data:
-   1. Username: Taken from the record in the `users` table
-   2. Series Identifier: 32-byte (64 digits in hex) cryptographically-secure random string of hex digits
-   3. Session Token: 32-byte (64 digits in hex) cryptographically-secure random string of hex digits
+    1. Username: Taken from the record in the `users` table
+    2. Series Identifier: 32-byte (64 digits in hex) cryptographically-secure random string of hex digits
+    3. Session Token: 32-byte (64 digits in hex) cryptographically-secure random string of hex digits
 3. Upon creation of these variables, a cookie will be created storing the *HASHED* username, session identifier, and secret token, and will last for *x* days
 4. A database record in the `session_tokens` table will be created, storing all the three variables along with an expiry date at the same time as the cookie
 
